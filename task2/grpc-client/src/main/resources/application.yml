@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: be-services-task2-grpc-client
+  main:
+    web-application-type: none
+
+grpc:
+  client:
+    pingPongService:
+      address: static://127.0.0.1:8080
+      negotiation-type: plaintext
+
+ping-pong-client:
+  message: Ping

@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.epam.task2.grpc.proto";
+option java_outer_classname = "PingPongProto";
+
+package pingpong;
+
+service PingPongService {
+  rpc Ping (PingRequest) returns (PingResponse);
+}
+
+message PingRequest {
+  int64 id = 1;
+  string message = 2;
+}
+
+message PingResponse {
+  int64 id = 1;
+  string message = 2;
+}

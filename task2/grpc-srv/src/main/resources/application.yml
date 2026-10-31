@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: be-services-task2-grpc-srv
+  main:
+    web-application-type: none
+
+grpc:
+  server:
+    port: 8080
