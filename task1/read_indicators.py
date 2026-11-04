@@ -1,7 +1,7 @@
 """
 Read Spring Boot Actuator health indicators from task1.
 
-Uses admin JWT (actuator endpoints require authentication).
+Uses admin JWT only when endpoints require authentication.
 
 Usage:
   pip install requests

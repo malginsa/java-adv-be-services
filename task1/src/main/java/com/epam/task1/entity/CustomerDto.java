@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class CustomerDto {
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
     private String name;
     private String address;
 }

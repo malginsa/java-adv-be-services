@@ -1,13 +1,14 @@
 package com.epam.task1.service;
 
 import com.epam.task1.entity.CustomerModel;
+import org.apache.coyote.BadRequestException;
 
 public interface CustomerService {
-    CustomerModel get(Integer id);
+    CustomerModel get(Long Long);
 
-    Integer create(CustomerModel customerModel);
+    Long create(CustomerModel customerModel) throws BadRequestException;
 
-    Integer update(CustomerModel model);
+    CustomerModel update(CustomerModel model);
 
-    void delete(Integer id);
+    void delete(Long Long);
 }

@@ -2,10 +2,12 @@ package com.epam.task1.service.impl;
 
 import com.epam.task1.entity.CustomerDto;
 import com.epam.task1.exception.InternalServerErrorException;
+import com.epam.task1.exception.NoContentException;
 import com.epam.task1.exception.NonExistentCustomerException;
 import com.epam.task1.entity.CustomerModel;
 import com.epam.task1.repo.CustomerRepo;
 import com.epam.task1.service.CustomerService;
+import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,7 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerModel get(Integer id) {
+    public CustomerModel get(Long id) {
         CustomerDto dto = repo.findById(id).orElseThrow(() -> new NonExistentCustomerException(id));
         return CustomerModel.builder()
                 .id(dto.getId())
@@ -27,32 +29,37 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Integer create(CustomerModel model) {
+    public Long create(CustomerModel model) throws BadRequestException {
         try {
             CustomerDto dto = CustomerDto.builder()
                     .name(model.getName())
                     .address(model.getAddress()).build();
             return repo.save(dto).getId();
         } catch (Exception e) {
-            throw new InternalServerErrorException("Can't store customer " + model + e.getMessage());
+            throw new BadRequestException("Can't store customer " + model + e.getMessage());
         }
     }
 
     @Override
-    public Integer update(CustomerModel model) {
+    public CustomerModel update(CustomerModel model) {
         try {
             CustomerDto newDto = repo.findById(model.getId())
                     .orElseGet(CustomerDto::new);
             newDto.setAddress(model.getAddress());
             newDto.setAddress(model.getAddress());
-            return repo.save(newDto).getId();
+
+            return CustomerModel.builder()
+                    .id(newDto.getId())
+                    .name(newDto.getName())
+                    .address(newDto.getAddress())
+                    .build();
         } catch (Exception e) {
-            throw new InternalServerErrorException("Can't update customer " + model + e.getMessage());
+            throw new NoContentException();
         }
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Long id) {
         try {
             repo.deleteById(id);
         } catch (Exception e) {
