@@ -17,11 +17,25 @@ mvn spring-boot:run
 - **Headers:** `Referer: https://example.com/java-adv-be-services-task3`
 - **Query:** `format`, `title`, `booksGenreId`, `applicationId`, `accessKey`
 
+## Sport API (Router Functions)
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `POST` | `/api/v1/sport/{sportname}` | Create sport; `409` if name exists |
+| `GET` | `/api/v1/sport?q=...` | Search by name (`q` optional — returns all if empty) |
+
+```bat
+curl.exe -X POST http://localhost:8080/api/v1/sport/football
+curl.exe "http://localhost:8080/api/v1/sport?q=foot"
+```
+
 ## H2 / R2DBC
 
 In-memory H2 with PostgreSQL compatibility mode. Schema: `src/main/resources/schema.sql`, applied via `ConnectionFactoryInitializer`.
 
 ### H2 Console (while the app is running)
+
+Default run is **reactive** (Sport API). For H2 Console: `mvn spring-boot:run -Dspring-boot.run.profiles=console`
 
 1. Start the app.
 2. Open [http://localhost:8080/h2-console](http://localhost:8080/h2-console).
