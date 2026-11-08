@@ -1,0 +1,32 @@
+spring:
+  main:
+    # Reactive stack required for WebFlux Router Functions; use profile "console" for H2 servlet UI
+    web-application-type: reactive
+  r2dbc:
+    url: r2dbc:h2:mem:///task3;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+    username: sa
+    password:
+  datasource:
+    url: jdbc:h2:mem:task3;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+rakuten:
+  books-foreign-book:
+    base-url: https://openapi.rakuten.co.jp
+    api-version-path: /services/api/BooksForeignBook/Search/20170404
+    referer: https://example.com/java-adv-be-services-task3
+    title: Potter
+    books-genre-id: "005407"
+    format: json
+    application-id: ${RAKUTEN_APPLICATION_ID:}
+    access-key: ${RAKUTEN_ACCESS_KEY:}
+
+logging:
+  level:
+    com.epam.task3: INFO
