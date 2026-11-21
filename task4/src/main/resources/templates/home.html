@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body style="font-family: sans-serif; padding: 40px;">
+<h2>Welcome, <span th:text="${email}"></span></h2>
+<p>Permissions: <span th:each="a : ${authorities}" th:text="${a.authority} + ' '"></span></p>
+<ul>
+    <li><a th:href="@{/info}">/info</a> (VIEW_INFO)</li>
+    <li><a th:href="@{/admin}">/admin</a> (VIEW_ADMIN)</li>
+    <li><a th:href="@{/blocked-users}">/blocked-users</a> (VIEW_ADMIN)</li>
+    <li><a th:href="@{/about}">/about</a> (public)</li>
+</ul>
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Logout</button>
+</form>
+</body>
+</html>

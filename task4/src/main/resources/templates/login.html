@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body { font-family: sans-serif; background: #f2f4f8; display: flex; justify-content: center; padding-top: 80px; }
+        form { background: #fff; padding: 24px 32px; border-radius: 8px; box-shadow: 0 2px 8px #0002; width: 300px; }
+        input { width: 100%; padding: 8px; margin: 6px 0 14px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background: #2d6cdf; color: #fff; border: 0; border-radius: 4px; }
+        .msg { padding: 8px; border-radius: 4px; margin-bottom: 12px; }
+        .error { background: #fde2e2; color: #a00; }
+        .ok { background: #e2f7e2; color: #060; }
+    </style>
+</head>
+<body>
+<form th:action="@{/login}" method="post">
+    <h2>Sign in</h2>
+    <div class="msg error" th:if="${param.error}">Invalid email or password.</div>
+    <div class="msg error" th:if="${param.blocked}">Too many failed attempts. Email is blocked for 5 minutes.</div>
+    <div class="msg ok" th:if="${param.logout}">You have been logged out.</div>
+    <label>Email</label>
+    <input type="email" name="email" required autofocus>
+    <label>Password</label>
+    <input type="password" name="password" required>
+    <button type="submit">Login</button>
+</form>
+</body>
+</html>
